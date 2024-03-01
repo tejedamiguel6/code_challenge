@@ -124,6 +124,8 @@ export default function ActionCell({ customer }: { customer: Customer }) {
         // setSuccess(conditionCheck) // Assuming you have a state to show messages to the user
         return
       }
+
+      // todo: add condition customer cannot deposit more than $1000 in a single transaction.
     } else if (selected === 'Deposit') {
       const depositResponse = await depositTransaction(customer, amount)
       setSuccess(depositResponse.message)
