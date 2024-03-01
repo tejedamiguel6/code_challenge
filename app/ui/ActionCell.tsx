@@ -128,9 +128,6 @@ export default function ActionCell({ customer }: { customer: Customer }) {
       const depositResponse = await depositTransaction(customer, amount)
       setSuccess(depositResponse.message)
       // setSuccess(res.message)
-    } else if (selected === 'Check Balance') {
-      // const res = await updateWithdrawlTransaction(customer, withdrawAmount)
-      // setSuccess(res.message)
     }
   }
 
@@ -214,17 +211,14 @@ export default function ActionCell({ customer }: { customer: Customer }) {
               )}
               {selected === 'Check Balance' && (
                 <>
-                  <form action={onSubmit}>
-                    <input
-                      type='number'
-                      value={amount}
-                      onChange={(e) => handleAmountEntered(e, customer)}
-                      placeholder='Amount to withdraw'
-                    />
-                    <button disabled={!amount} type='submit'>
-                      Submit
-                    </button>
-                  </form>
+                  <Typography
+                    sx={{
+                      fontSize: '1.6rem',
+                      marginTop: '20px',
+                    }}
+                  >
+                    Balance: {customer.amount}
+                  </Typography>
                 </>
               )}
 
