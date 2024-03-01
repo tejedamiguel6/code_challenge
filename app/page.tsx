@@ -1,18 +1,27 @@
-import Image from 'next/image'
 import styles from './page.module.css'
+import SearchAccount from './components/SearchAccount'
+// import CustomerNameResult from './components/CustomerNameResult'
+import { fetchCustomerByAccount } from './lib/fetchCustomerByAccount'
+import CustomerTable from './ui/CustomerTable'
 
-import { sql } from '@vercel/postgres'
+export default async function Home({
+  searchParams,
+}: {
+  searchParams?: {
+    query?: number
+  }
+}) {
+  const query = searchParams?.query
+  const customer = await fetchCustomerByAccount(query)
 
-import { getData } from './lib/data'
-
-export default function Home() {
-  // const data = getData()
-
-  // console.log(data, 'wow')
   return (
     <main className={styles.main}>
       <div className={styles.description}>
-        <h1>Coding Challenge ! lets go</h1>
+        <h1 style={{ textAlign: 'center' }}>SEARCH ACCOUNT</h1>
+        <SearchAccount placeholder={'Use Account number'} />
+        {/* <CustomerNameResult query={query} /> */}
+
+        <CustomerTable customer={customer} />
       </div>
     </main>
   )
